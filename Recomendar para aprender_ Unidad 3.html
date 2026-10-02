@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Recomendar para aprender: Unidad 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#E9EFED;--surface:#FFFFFF;--surface2:#F2F6F5;--ink:#12262B;--muted:#4D6267;--line:#C7D5D2;
+  --primary:#0E6B5C;--on-primary:#FFFFFF;--accent:#FFC83D;--on-accent:#3A2B00;--danger:#B93B32;--warn:#9A5B00;
+  --t-video:#2F6FDE;--t-lectura:#7D4FD0;--t-ejercicio:#0B8466;--t-simulacion:#C96A14;--t-quiz:#B93B32;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E181B;--surface:#16252A;--surface2:#1C2E34;--ink:#E7F0F1;--muted:#9DB2B7;--line:#2C4249;
+    --primary:#46C4AC;--on-primary:#06231E;--accent:#FFC83D;--on-accent:#3A2B00;--danger:#FF8A80;--warn:#FFC070;
+    --t-video:#7FAEFF;--t-lectura:#B79BFF;--t-ejercicio:#4FD1AE;--t-simulacion:#FFA95C;--t-quiz:#FF8A80;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E181B;--surface:#16252A;--surface2:#1C2E34;--ink:#E7F0F1;--muted:#9DB2B7;--line:#2C4249;
+  --primary:#46C4AC;--on-primary:#06231E;--accent:#FFC83D;--on-accent:#3A2B00;--danger:#FF8A80;--warn:#FFC070;
+  --t-video:#7FAEFF;--t-lectura:#B79BFF;--t-ejercicio:#4FD1AE;--t-simulacion:#FFA95C;--t-quiz:#FF8A80;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.55}
+h1,h2,h3{font-family:"Bricolage Grotesque","Public Sans",system-ui,sans-serif;line-height:1.15;margin:0;letter-spacing:-.01em}
+p{margin:0}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--primary);outline-offset:2px}
+
+.top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;max-width:1120px;margin:0 auto;padding:22px 20px 10px}
+.top h1{font-size:clamp(28px,5vw,40px);font-weight:700}
+.top p{color:var(--muted);margin-top:6px;max-width:60ch}
+.ghost{background:transparent;border:1px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer;white-space:nowrap}
+.ghost:hover{background:var(--surface2)}
+.ghost[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.tabs-in{display:flex;gap:4px;max-width:1120px;margin:0 auto;padding:0 12px;overflow-x:auto}
+.tab{background:none;border:0;border-bottom:4px solid transparent;padding:14px 14px 10px;cursor:pointer;font-weight:600;color:var(--muted);white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tab:hover{color:var(--ink)}
+
+main{max-width:1120px;margin:0 auto;padding:22px 20px 56px}
+.lead{margin-bottom:18px}
+.lead h2{font-size:clamp(24px,4vw,32px)}
+.lead p{color:var(--muted);margin-top:6px;max-width:70ch}
+.grid2{display:grid;grid-template-columns:minmax(0,390px) minmax(0,1fr);gap:20px;align-items:start}
+.stack{display:grid;gap:16px}
+@media (max-width:900px){.grid2{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
+.panel h3{font-size:19px;margin-bottom:12px}
+.hint{color:var(--muted);font-size:14px;margin:-6px 0 12px}
+fieldset{border:0;padding:0;margin:14px 0 0}
+legend,.fl{font-weight:600;font-size:14px;padding:0;margin-bottom:8px;display:flex;justify-content:space-between;gap:8px}
+.fl output{color:var(--primary);font-weight:600}
+input[type=range]{width:100%;accent-color:var(--primary)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--surface2);border-radius:999px;padding:6px 12px;font-size:14px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.seg{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.seg button{border:1px solid var(--line);background:var(--surface2);border-radius:10px;padding:8px 6px;cursor:pointer;font-size:14px;font-weight:500}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.algo-help{font-size:14px;color:var(--muted);margin:12px 0 4px}
+.row-check{display:flex;gap:10px;align-items:flex-start;margin-top:14px;font-size:14px}
+.row-check input{margin-top:4px;accent-color:var(--primary)}
+.dim{opacity:.45;pointer-events:none}
+
+.hrow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+.hrow:first-child{border-top:0}
+.hrow .ht{font-size:14px;line-height:1.3}
+.hrow .hs{font-size:12px;color:var(--muted)}
+.tri{display:flex;gap:4px}
+.tri button{border:1px solid var(--line);background:var(--surface2);border-radius:8px;padding:4px 8px;font-size:12px;cursor:pointer}
+.tri button[aria-pressed="true"][data-v="y"]{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.tri button[aria-pressed="true"][data-v="n"]{background:var(--danger);color:#fff;border-color:var(--danger)}
+.tri button[aria-pressed="true"][data-v=""]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+.rhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.rhead h3{margin:0}
+.rmeta{font-size:13px;color:var(--muted)}
+.rec{display:grid;grid-template-columns:44px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--line)}
+.rec:first-of-type{border-top:0}
+.rank{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:30px;line-height:1;color:var(--primary)}
+.rt{font-weight:600;font-size:17px;line-height:1.3}
+.meta{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:6px 0;font-size:13px;color:var(--muted)}
+.tag{color:var(--c);border:1px solid var(--c);border-radius:6px;padding:0 7px;font-weight:600;font-size:12px}
+.ladder{display:inline-flex;align-items:center;gap:6px}
+.sc{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);margin:6px 0}
+.sc .bt{flex:1;max-width:220px}
+.why{margin:6px 0 0;padding:0;list-style:none;font-size:14px;display:grid;gap:2px}
+.why li::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;background:var(--primary)}
+.why li.warn::before{background:var(--accent);outline:1px solid var(--warn)}
+.why li.info::before{background:var(--line)}
+.note{margin-top:12px;padding:10px 12px;border-radius:10px;background:var(--surface2);border-left:4px solid var(--accent);font-size:14px}
+
+.bars{display:grid;gap:8px}
+.brow{display:grid;grid-template-columns:minmax(90px,150px) 1fr 56px;gap:10px;align-items:center;font-size:14px}
+.bt{display:block;height:14px;background:var(--surface2);border-radius:5px;overflow:hidden}
+.bt i{display:block;height:100%;background:var(--c,var(--primary));border-radius:5px;transition:width .35s}
+.bv{text-align:right;font-variant-numeric:tabular-nums}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+.kpi b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:28px;line-height:1.1}
+.kpi span{font-size:13px;color:var(--muted)}
+.cards2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+.hm{fill:var(--primary)}
+.hm0{fill:var(--surface2)}
+svg{max-width:100%;height:auto;display:block}
+.cap{font-size:13px;color:var(--muted);margin-top:10px}
+.insights{margin:0;padding-left:20px;display:grid;gap:8px}
+.callout{border:1px dashed var(--line);border-radius:12px;padding:14px 16px;font-size:14px;background:var(--surface)}
+.callout ul{margin:8px 0 0;padding-left:20px}
+select{background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;max-width:100%}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap;font-variant-numeric:tabular-nums}
+th{font-weight:600;color:var(--muted);font-size:13px}
+td.best{background:color-mix(in srgb,var(--accent) 35%,transparent);font-weight:600}
+
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:0 0 18px;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px}
+.steps li::before{content:counter(s);display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--on-accent);font-weight:700;font-size:13px;margin-bottom:6px}
+.steps b{display:block}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.btn{border:1px solid var(--primary);background:var(--primary);color:var(--on-primary);border-radius:10px;padding:10px 14px;font-weight:600;cursor:pointer}
+.btn.sec{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.sec:hover{background:var(--surface2)}
+details{margin-top:12px;font-size:14px}
+summary{cursor:pointer;font-weight:600}
+details dl{margin:10px 0 0;display:grid;gap:6px}
+details dt{font-weight:600}
+details dd{margin:0 0 4px;color:var(--muted)}
+.qs{margin:0;padding-left:20px;display:grid;gap:8px}
+footer{max-width:1120px;margin:0 auto;padding:0 20px 28px;color:var(--muted);font-size:13px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Recomendar para aprender</h1>
+    <p>Unidad 3: diseño de sistemas de recomendación para educación digital. Tres laboratorios que se usan directamente en el navegador.</p>
+  </div>
+  <button class="ghost" id="theme" aria-pressed="false">Tema oscuro</button>
+</header>
+
+<nav class="tabs" aria-label="Módulos de la unidad">
+  <div class="tabs-in" role="tablist">
+    <button class="tab" role="tab" id="t1" data-tab="v1" aria-selected="true" aria-controls="v1">1. Personalizar el aprendizaje</button>
+    <button class="tab" role="tab" id="t2" data-tab="v2" aria-selected="false" aria-controls="v2" tabindex="-1">2. Analizar datos de usuarios</button>
+    <button class="tab" role="tab" id="t3" data-tab="v3" aria-selected="false" aria-controls="v3" tabindex="-1">3. Probar prototipos</button>
+  </div>
+</nav>
+
+<main>
+<!-- MÓDULO 1 -->
+<section id="v1" role="tabpanel" aria-labelledby="t1">
+  <div class="lead">
+    <h2>Personalizar el aprendizaje</h2>
+    <p>Construye el perfil de un estudiante y mira cómo cambia la lista de recursos según el algoritmo. Cada recomendación explica por qué aparece.</p>
+  </div>
+  <div class="grid2">
+    <div class="stack">
+      <div class="panel">
+        <h3>Perfil del estudiante</h3>
+        <label class="fl" for="level">Nivel actual <output id="lvlOut"></output></label>
+        <input type="range" id="level" min="1" max="4" step="1" value="2">
+        <fieldset><legend>Temas de interés</legend><div class="chips" id="chTopics"></div></fieldset>
+        <fieldset><legend>Formatos preferidos</legend><div class="chips" id="chTypes"></div></fieldset>
+      </div>
+      <div class="panel">
+        <h3>Historial</h3>
+        <p class="hint">Marca qué recursos ya usó y si le sirvieron. Los recursos marcados no se vuelven a recomendar.</p>
+        <div id="hist"></div>
+      </div>
+      <div class="panel">
+        <h3>Algoritmo</h3>
+        <div class="seg" id="algo1" role="group" aria-label="Algoritmo de recomendación"></div>
+        <p class="algo-help" id="algoHelp"></p>
+        <div id="alphaBox">
+          <label class="fl" for="alpha">Peso del contenido (α) <output id="alphaOut"></output></label>
+          <input type="range" id="alpha" min="0" max="1" step="0.1" value="0.5">
+        </div>
+        <div id="kBox">
+          <label class="fl" for="k1">Estudiantes parecidos a consultar (k) <output id="k1Out"></output></label>
+          <input type="range" id="k1" min="3" max="40" step="1" value="15">
+        </div>
+        <label class="row-check"><input type="checkbox" id="zpd" checked><span>Ajustar la dificultad al nivel del estudiante. Evita recursos demasiado fáciles o demasiado difíciles.</span></label>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="rhead"><h3>Recomendado para este estudiante</h3><span class="rmeta" id="rmeta"></span></div>
+      <div id="recs" aria-live="polite"></div>
+      <div id="rnote"></div>
+    </div>
+  </div>
+</section>
+
+<!-- MÓDULO 2 -->
+<section id="v2" role="tabpanel" aria-labelledby="t2" hidden>
+  <div class="lead">
+    <h2>Analizar datos de usuarios</h2>
+    <p>Un conjunto de datos simulado de 80 estudiantes y 30 recursos. Explora qué muestran las interacciones antes de elegir un algoritmo.</p>
+  </div>
+  <div class="kpis" id="kpis"></div>
+  <div class="cards2">
+    <div class="panel">
+      <h3>Valoración media por formato</h3>
+      <div id="chFormat"></div>
+      <p class="cap">Escala de 1 a 5. Sirve para saber qué formatos funcionan mejor con esta población.</p>
+    </div>
+    <div class="panel">
+      <h3>Finalización según la dificultad</h3>
+      <div id="chZpd"></div>
+      <p class="cap">Porcentaje del recurso que el estudiante completó, según qué tan lejos estaba de su nivel.</p>
+    </div>
+    <div class="panel">
+      <h3>Matriz estudiante por recurso</h3>
+      <div id="heat"></div>
+      <p class="cap">Cada fila es un estudiante y cada columna un recurso. Las celdas de color son valoraciones: más oscuro, mejor valorado. Las celdas vacías son lo que el sistema no sabe.</p>
+    </div>
+    <div class="panel">
+      <h3>Popularidad de los recursos</h3>
+      <div id="pop"></div>
+      <p class="cap" id="popCap"></p>
+    </div>
+  </div>
+  <div class="cards2" style="margin-top:16px">
+    <div class="panel">
+      <h3>Lo que dicen los datos</h3>
+      <ul class="insights" id="insights"></ul>
+    </div>
+    <div class="panel">
+      <h3>Ficha de un estudiante</h3>
+      <label class="fl" for="stSel">Elige un estudiante</label>
+      <select id="stSel"></select>
+      <div class="tw" style="margin-top:12px"><table id="stTable"></table></div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:16px">
+    <b>Antes de usar datos reales de estudiantes</b>
+    <ul>
+      <li>Pide consentimiento informado y explica qué datos se usan y para qué.</li>
+      <li>Anonimiza los registros. Una recomendación no necesita saber el nombre.</li>
+      <li>Revisa si el sistema encierra a algunos estudiantes en recursos fáciles o repetidos (burbuja de filtro).</li>
+      <li>Comprueba que funcione igual de bien para estudiantes nuevos, con poco historial.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- MÓDULO 3 -->
+<section id="v3" role="tabpanel" aria-labelledby="t3" hidden>
+  <div class="lead">
+    <h2>Probar prototipos de recomendación</h2>
+    <p>Configura un prototipo, ejecútalo sobre datos que el sistema no ha visto y compara resultados. Así se decide qué prototipo merece pasar a una prueba con estudiantes reales.</p>
+  </div>
+  <ol class="steps">
+    <li><b>Objetivo</b>Qué debe lograr: que el estudiante avance, no solo que haga clic.</li>
+    <li><b>Datos</b>Qué interacciones hay y cuántas por estudiante.</li>
+    <li><b>Configuración</b>Algoritmo y parámetros del prototipo.</li>
+    <li><b>Prueba sin conexión</b>Se ocultan valoraciones y se mide si el sistema las acierta.</li>
+    <li><b>Prueba con estudiantes</b>Piloto o prueba A/B antes de lanzarlo.</li>
+  </ol>
+  <div class="grid2">
+    <div class="panel">
+      <h3>Configuración del prototipo</h3>
+      <div class="seg" id="algo3" role="group" aria-label="Algoritmo a probar"></div>
+      <div id="alpha3Box" style="margin-top:14px">
+        <label class="fl" for="alpha3">Peso del contenido (α) <output id="alpha3Out"></output></label>
+        <input type="range" id="alpha3" min="0" max="1" step="0.1" value="0.5">
+      </div>
+      <div id="k3Box" style="margin-top:14px">
+        <label class="fl" for="k3">Vecinos consultados (k) <output id="k3Out"></output></label>
+        <input type="range" id="k3" min="3" max="40" step="1" value="15">
+      </div>
+      <div style="margin-top:14px">
+        <label class="fl" for="n3">Recursos recomendados (Top-N) <output id="n3Out"></output></label>
+        <input type="range" id="n3" min="3" max="10" step="1" value="5">
+      </div>
+      <div style="margin-top:14px">
+        <label class="fl" for="h3">Historial disponible por estudiante <output id="h3Out"></output></label>
+        <input type="range" id="h3" min="2" max="12" step="1" value="12">
+        <p class="hint" style="margin:6px 0 0">Con poco historial se simula el arranque en frío de un estudiante nuevo.</p>
+      </div>
+      <div style="margin-top:14px">
+        <label class="fl" for="f3">Valoraciones ocultas para la prueba <output id="f3Out"></output></label>
+        <input type="range" id="f3" min="15" max="40" step="5" value="25">
+      </div>
+      <label class="row-check"><input type="checkbox" id="z3" checked><span>Ajustar la dificultad al nivel del estudiante</span></label>
+      <div class="btns">
+        <button class="btn" id="run3">Ejecutar prueba</button>
+        <button class="btn sec" id="cmp3">Comparar los 4 algoritmos</button>
+        <button class="btn sec" id="clr3">Borrar resultados</button>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>Resultados</h3>
+      <div class="tw"><table id="logT"></table></div>
+      <p class="cap">Cada prueba se repite con 5 divisiones distintas de los datos y se promedia. Se resalta el mejor valor de cada columna.</p>
+      <h3 style="margin-top:20px;font-size:16px">Precisión de cada prueba</h3>
+      <div id="logBars" style="margin-top:10px"></div>
+      <div class="btns"><button class="btn sec" id="copy3">Copiar tabla</button><span class="rmeta" id="copyMsg" role="status" style="align-self:center"></span></div>
+      <details>
+        <summary>Qué mide cada columna</summary>
+        <dl>
+          <dt>Precisión</dt><dd>De los recursos recomendados, qué proporción el estudiante valoró con 4 o 5.</dd>
+          <dt>Recall</dt><dd>De todos los recursos que le habrían gustado, qué proporción apareció en la lista.</dd>
+          <dt>Aciertos</dt><dd>Porcentaje de estudiantes con al menos un buen recurso en su lista.</dd>
+          <dt>Cobertura</dt><dd>Qué parte del catálogo se recomienda a alguien. Una cobertura baja indica que el sistema repite siempre lo mismo.</dd>
+          <dt>Diversidad</dt><dd>Qué tan variados son los temas dentro de cada lista.</dd>
+          <dt>En su nivel</dt><dd>Porcentaje de recomendaciones a no más de un nivel de distancia del estudiante.</dd>
+        </dl>
+      </details>
+    </div>
+  </div>
+  <div class="panel" style="margin-top:16px">
+    <h3>Para discutir en clase</h3>
+    <ol class="qs">
+      <li>Baja el historial disponible a 2 y compara los cuatro algoritmos. ¿Cuál se desploma? ¿Cuál resiste mejor y por qué?</li>
+      <li>Compara la cobertura de Popularidad con la de Contenido. Si un sistema solo recomienda lo más popular, ¿qué pierden los estudiantes?</li>
+      <li>Activa y desactiva el ajuste de dificultad. La precisión puede bajar, pero el porcentaje en su nivel sube. ¿Qué te importa más en un entorno educativo?</li>
+      <li>Las valoraciones simuladas no incluyen aprendizaje real. ¿Qué dato adicional pedirías a una plataforma para medir si el estudiante aprendió?</li>
+    </ol>
+  </div>
+</section>
+</main>
+<footer>Los datos de estudiantes son sintéticos y se generan en tu navegador. No se recopila información real de nadie.</footer>
+
+<script>
+(function(){
+'use strict';
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const num=(x,d=2)=>x.toFixed(d).replace('.',',');
+const pct=x=>(x*100).toFixed(1).replace('.',',')+'%';
+
+/* ---------- Catálogo ---------- */
+const TOPICS=['Álgebra','Programación','Estadística','Escritura académica','Biología','Historia'];
+const TYPES=['Video','Lectura','Ejercicio','Simulación','Quiz'];
+const TCOL=['var(--t-video)','var(--t-lectura)','var(--t-ejercicio)','var(--t-simulacion)','var(--t-quiz)'];
+const LEVELS=['','Inicial','Básico','Intermedio','Avanzado'];
+const RAW=[
+ ["Ecuaciones lineales paso a paso",0,0,1],["Factorización con ejemplos",0,1,2],["Práctica de sistemas de ecuaciones",0,2,2],["Graficador de funciones",0,3,3],["Quiz de polinomios",0,4,3],
+ ["Variables y tipos de datos en Python",1,0,1],["Bucles y condicionales",1,2,2],["Guía de estructuras de datos",1,1,3],["Visualizador de algoritmos de ordenamiento",1,3,3],["Quiz de funciones y recursión",1,4,4],
+ ["Media, mediana y moda",2,0,1],["Probabilidad condicional",2,1,3],["Práctica de distribuciones",2,2,3],["Simulador de intervalos de confianza",2,3,4],["Quiz de pruebas de hipótesis",2,4,4],
+ ["Cómo estructurar un ensayo",3,0,1],["Citar con normas APA",3,1,2],["Taller de párrafos argumentativos",3,2,2],["Revisor de coherencia textual",3,3,3],["Quiz de conectores y cohesión",3,4,2],
+ ["La célula y sus orgánulos",4,0,1],["Genética mendeliana",4,1,3],["Práctica de cruces genéticos",4,2,3],["Laboratorio virtual de fotosíntesis",4,3,2],["Quiz de metabolismo celular",4,4,4],
+ ["Independencias en América Latina",5,0,2],["Fuentes primarias del siglo XIX",5,1,4],["Análisis de documentos históricos",5,2,4],["Mapa interactivo de rutas comerciales",5,3,2],["Quiz de revoluciones industriales",5,4,3]
+];
+const ITEMS=RAW.map((r,i)=>({id:i,title:r[0],t:r[1],ty:r[2],d:r[3],dur:[10,18,24,20,10][r[2]]+r[3]*2}));
+const NI=ITEMS.length, NS=80;
+const VEC=ITEMS.map(it=>{const v=new Array(11).fill(0);v[it.t]=1;v[6+it.ty]=0.8;return v;});
+
+function rng(seed){let a=seed>>>0;return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+function cos(a,b){let n=0,x=0,y=0;for(let i=0;i<a.length;i++){n+=a[i]*b[i];x+=a[i]*a[i];y+=b[i]*b[i];}return x&&y?n/Math.sqrt(x*y):0;}
+function fit(d,level){const g=d-level;if(g>1)return Math.max(0.15,1-0.4*(g-1));if(g<-1)return Math.max(0.4,1-0.2*(-g-1));return 1;}
+
+/* ---------- Datos sintéticos ---------- */
+const R=rng(2026);
+const popBias=ITEMS.map(()=>0.4+1.6*Math.pow(R(),2));
+const S=[],M=[],C=[];
+(function gen(){
+  function interact(aff,tp,level,it){
+    const gap=it.d-level;
+    const z=2.6+1.6*aff[it.t]+0.9*tp[it.ty]-0.45*Math.max(0,gap-1)-0.25*Math.max(0,-gap-1)+(R()-0.5)*1.4;
+    const rating=clamp(Math.round(z),1,5);
+    const comp=clamp(0.82+0.05*(rating-3)-0.17*Math.max(0,gap-1)-0.08*Math.max(0,-gap-1)+(R()-0.5)*0.16,0.05,1);
+    return [rating,comp];
+  }
+  for(let s=0;s<NS;s++){
+    const aff=TOPICS.map(()=>R()*0.4);
+    const t1=Math.floor(R()*6),t2=Math.floor(R()*6);
+    aff[t1]=0.6+R()*0.4;aff[t2]=0.6+R()*0.4;
+    const tp=TYPES.map(()=>R()*0.4);tp[Math.floor(R()*5)]=0.6+R()*0.4;
+    const level=1+Math.floor(R()*4);
+    const row=new Array(NI).fill(0),crow=new Array(NI).fill(0);
+    let cnt=0;
+    for(let i=0;i<NI;i++){
+      const p=Math.min(0.75,(0.06+0.22*aff[ITEMS[i].t])*popBias[i]*2.2);
+      if(R()<p){const x=interact(aff,tp,level,ITEMS[i]);row[i]=x[0];crow[i]=x[1];cnt++;}
+    }
+    while(cnt<6){const i=Math.floor(R()*NI);if(!row[i]){const x=interact(aff,tp,level,ITEMS[i]);row[i]=x[0];crow[i]=x[1];cnt++;}}
+    S.push({id:s,name:'Est. '+String(s+1).padStart(2,'0'),level});M.push(row);C.push(crow);
+  }
+})();
+
+/* ---------- Motor de recomendación ---------- */
+function itemStats(T){
+  const count=new Array(NI).fill(0),sum=new Array(NI).fill(0);
+  T.forEach(r=>r.forEach((v,i)=>{if(v>0){count[i]++;sum[i]+=v;}}));
+  return {count,mean:count.map((c,i)=>(sum[i]+6)/(c+2))};
+}
+const STATS=itemStats(M);
+
+function collabScores(ur,k,T,excl,stats){
+  const rated=[];for(let i=0;i<NI;i++)if(ur[i]>0)rated.push(i);
+  const sims=[];
+  for(let v=0;v<T.length;v++){
+    if(v===excl)continue;
+    const rv=T[v];let num=0,da=0,db=0,n=0;
+    for(const i of rated){if(rv[i]>0){const a=ur[i]-3,b=rv[i]-3;num+=a*b;da+=a*a;db+=b*b;n++;}}
+    if(!n)continue;
+    const den=Math.sqrt(da*db);
+    const sim=(den>0?num/den:0)*(n/(n+2));
+    if(sim>0)sims.push({v,sim});
+  }
+  sims.sort((a,b)=>b.sim-a.sim);
+  const nb=sims.slice(0,k);
+  const scores=new Array(NI).fill(0),info=new Array(NI).fill(null);
+  for(let i=0;i<NI;i++){
+    if(ur[i]>0)continue;
+    let num=0,den=0,cnt=0,sr=0;
+    for(const n of nb){const r=T[n.v][i];if(r>0){num+=n.sim*(r-3);den+=n.sim;cnt++;sr+=r;}}
+    if(den>0){scores[i]=3+num/den;info[i]={cnt,avg:sr/cnt};}
+    else scores[i]=stats.mean[i];
+  }
+  return {scores,info,nb};
+}
+
+function rank(o){
+  const {algo,userVec,ur,T,excl,alpha,k,zpd,level,N,stats}=o;
+  const cand=[];for(let i=0;i<NI;i++)if(!ur[i])cand.push(i);
+  const norm=a=>{let mn=Infinity,mx=-Infinity;cand.forEach(i=>{mn=Math.min(mn,a[i]);mx=Math.max(mx,a[i]);});return a.map(v=>mx>mn?(v-mn)/(mx-mn):0.5);};
+  let cs=null,col=null,ncol=null,base,nb=[];
+  if(algo==='popularidad'){base=norm(stats.count.map((c,i)=>c+stats.mean[i]/10));}
+  else{
+    if(algo==='contenido'||algo==='hibrido')cs=norm(ITEMS.map((_,i)=>cos(userVec,VEC[i])));
+    if(algo==='colaborativo'||algo==='hibrido'){col=collabScores(ur,k,T,excl,stats);ncol=norm(col.scores);nb=col.nb;}
+    if(algo==='contenido')base=cs;
+    else if(algo==='colaborativo')base=ncol;
+    else base=cs.map((v,i)=>alpha*v+(1-alpha)*ncol[i]);
+  }
+  const fin=base.map((v,i)=>zpd?v*fit(ITEMS[i].d,level):v);
+  cand.sort((a,b)=>fin[b]-fin[a]||a-b);
+  const list=cand.slice(0,N).map(i=>({i,score:fin[i],info:col?col.info[i]:null,usesCollab:!!col}));
+  return {list,nb};
+}
+
+/* ---------- Utilidades de interfaz ---------- */
+function ladder(d,level){
+  const hs=[6,10,14,18];let bars='';
+  for(let s=1;s<=4;s++){
+    bars+=`<rect x="${(s-1)*11}" y="${22-hs[s-1]}" width="8" height="${hs[s-1]}" rx="2" fill="${s<=d?'var(--ink)':'var(--line)'}"/>`;
+  }
+  const lx=(level-1)*11+4;
+  bars+=`<circle cx="${lx}" cy="27" r="3" fill="var(--accent)" stroke="var(--warn)" stroke-width="1"/>`;
+  return `<svg width="44" height="30" viewBox="0 0 44 30" role="img" aria-label="Dificultad ${d} de 4, nivel del estudiante ${level}">${bars}</svg>`;
+}
+function bars(rows,max,fmt){
+  return '<div class="bars">'+rows.map(r=>`<div class="brow"><span>${r.label}</span><span class="bt"><i style="width:${Math.max(0,r.value/max*100).toFixed(1)}%;--c:${r.color||'var(--primary)'}"></i></span><b class="bv">${fmt(r.value)}</b></div>`).join('')+'</div>';
+}
+const ALGO_NAMES={popularidad:'Popularidad',contenido:'Contenido',colaborativo:'Colaborativo',hibrido:'Híbrido'};
+const ALGO_HELP={
+  popularidad:'Recomienda lo que más estudiantes han usado. No personaliza: sirve como punto de comparación.',
+  contenido:'Compara las características de cada recurso (tema y formato) con el perfil del estudiante y con lo que le sirvió.',
+  colaborativo:'Busca estudiantes con historial parecido y promedia lo que ellos valoraron. Necesita historial para funcionar.',
+  hibrido:'Mezcla contenido y colaborativo. El valor α decide cuánto pesa el contenido.'
+};
+function buildSeg(el,cur,onPick){
+  el.innerHTML=Object.keys(ALGO_NAMES).map(a=>`<button type="button" data-a="${a}" aria-pressed="${a===cur}">${ALGO_NAMES[a]}</button>`).join('');
+  el.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;$$('button',el).forEach(x=>x.setAttribute('aria-pressed',x===b));onPick(b.dataset.a);});
+}
+
+/* ---------- Pestañas y tema ---------- */
+function showTab(id){
+  $$('.tab').forEach(b=>{const on=b.dataset.tab===id;b.setAttribute('aria-selected',on);b.tabIndex=on?0:-1;});
+  ['v1','v2','v3'].forEach(v=>{$('#'+v).hidden=v!==id;});
+  window.scrollTo(0,0);
+}
+$$('.tab').forEach((b,i,all)=>{
+  b.addEventListener('click',()=>showTab(b.dataset.tab));
+  b.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const n=all[(i+(e.key==='ArrowRight'?1:all.length-1))%all.length];n.focus();showTab(n.dataset.tab);}
+  });
+});
+const root=document.documentElement;
+function isDark(){const t=root.getAttribute('data-theme');return t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;}
+function syncTheme(){const b=$('#theme');b.setAttribute('aria-pressed',isDark());}
+$('#theme').addEventListener('click',()=>{root.setAttribute('data-theme',isDark()?'light':'dark');syncTheme();});
+syncTheme();
+
+/* ---------- Módulo 1 ---------- */
+const st={level:2,interests:new Set([1,2]),formats:new Set([2,3]),hist:{5:'y',6:'y',10:'y',16:'n',21:'n'},algo:'hibrido',alpha:0.5,k:15,zpd:true};
+const HIST_IDS=[5,6,10,0,16,21,26,11,15,3];
+
+function buildM1(){
+  $('#chTopics').innerHTML=TOPICS.map((t,i)=>`<button type="button" class="chip" data-i="${i}" aria-pressed="${st.interests.has(i)}">${t}</button>`).join('');
+  $('#chTypes').innerHTML=TYPES.map((t,i)=>`<button type="button" class="chip" data-i="${i}" aria-pressed="${st.formats.has(i)}">${t}</button>`).join('');
+  $('#hist').innerHTML=HIST_IDS.map(id=>{
+    const it=ITEMS[id],v=st.hist[id]||'';
+    return `<div class="hrow" data-id="${id}"><div><div class="ht">${it.title}</div><div class="hs">${TOPICS[it.t]}, ${TYPES[it.ty].toLowerCase()}</div></div>
+      <div class="tri" role="group" aria-label="${it.title}">
+        <button type="button" data-v="y" aria-pressed="${v==='y'}">Me sirvió</button>
+        <button type="button" data-v="n" aria-pressed="${v==='n'}">No</button>
+        <button type="button" data-v="" aria-pressed="${v===''}">No lo usó</button>
+      </div></div>`;
+  }).join('');
+  buildSeg($('#algo1'),st.algo,a=>{st.algo=a;m1Controls();m1Results();});
+}
+function m1Controls(){
+  $('#lvlOut').textContent=st.level+' de 4, '+LEVELS[st.level];
+  $('#alphaOut').textContent=num(st.alpha,1);
+  $('#k1Out').textContent=st.k;
+  $('#algoHelp').textContent=ALGO_HELP[st.algo];
+  $('#alphaBox').hidden=st.algo!=='hibrido';
+  $('#kBox').hidden=!(st.algo==='colaborativo'||st.algo==='hibrido');
+}
+function reasons(rec){
+  const it=ITEMS[rec.i],r=[];
+  if(st.algo==='popularidad'){r.push(['info',`${STATS.count[rec.i]} estudiantes lo han valorado`]);}
+  else{
+    if(st.algo!=='colaborativo'){
+      if(st.interests.has(it.t))r.push(['ok',`Coincide con su interés en ${TOPICS[it.t]}`]);
+      else if(Object.keys(st.hist).some(id=>st.hist[id]==='y'&&ITEMS[id].t===it.t))r.push(['ok',`Parecido a recursos de ${TOPICS[it.t]} que le sirvieron`]);
+      if(st.formats.has(it.ty))r.push(['ok',`Formato ${TYPES[it.ty].toLowerCase()}, uno de sus preferidos`]);
+    }
+    if(rec.usesCollab){
+      if(rec.info){const n=rec.info.cnt;r.push(['ok',`${n} ${n===1?'estudiante parecido lo valoró':'estudiantes parecidos lo valoraron'} con ${num(rec.info.avg,1)} en promedio`]);}
+      else r.push(['info','Ningún estudiante parecido lo ha usado: se estima con su valoración general']);
+    }
+  }
+  const g=it.d-st.level;
+  if(Math.abs(g)<=1)r.push(['ok','Dificultad cercana a su nivel']);
+  else if(g>1)r.push(['warn',`Reto grande: dificultad ${it.d} frente a su nivel ${st.level}`]);
+  else r.push(['warn','Probablemente muy fácil para su nivel']);
+  return r.slice(0,4);
+}
+function m1Results(){
+  const ur=new Array(NI).fill(0);
+  Object.keys(st.hist).forEach(id=>{if(st.hist[id]==='y')ur[id]=5;else if(st.hist[id]==='n')ur[id]=1;});
+  const uv=new Array(11).fill(0);
+  st.interests.forEach(t=>uv[t]+=1);
+  st.formats.forEach(t=>uv[6+t]+=0.8);
+  for(let i=0;i<NI;i++){if(ur[i]===5)VEC[i].forEach((x,j)=>uv[j]+=0.7*x);if(ur[i]===1)VEC[i].forEach((x,j)=>uv[j]-=0.7*x);}
+  const res=rank({algo:st.algo,userVec:uv,ur,T:M,excl:-1,alpha:st.alpha,k:st.k,zpd:st.zpd,level:st.level,N:6,stats:STATS});
+  const maxS=Math.max(...res.list.map(x=>x.score),0.0001);
+  $('#recs').innerHTML=res.list.map((rec,n)=>{
+    const it=ITEMS[rec.i];
+    return `<article class="rec"><div class="rank" aria-hidden="true">${n+1}</div><div>
+      <div class="rt">${it.title}</div>
+      <div class="meta"><span class="tag" style="--c:${TCOL[it.ty]}">${TYPES[it.ty]}</span><span>${TOPICS[it.t]}</span><span>${it.dur} min</span><span class="ladder">${ladder(it.d,st.level)}</span></div>
+      <div class="sc"><span>Afinidad</span><span class="bt"><i style="width:${(rec.score/maxS*100).toFixed(0)}%"></i></span></div>
+      <ul class="why">${reasons(rec).map(x=>`<li class="${x[0]}">${x[1]}</li>`).join('')}</ul></div></article>`;
+  }).join('');
+  let meta=ALGO_NAMES[st.algo]+(st.algo==='hibrido'?' (α '+num(st.alpha,1)+')':'');
+  if(res.nb.length)meta+='. Vecinos: '+res.nb.slice(0,3).map(n=>`${S[n.v].name} (${num(n.sim,2)})`).join(', ');
+  $('#rmeta').textContent=meta;
+  const noHist=!ur.some(x=>x>0);
+  let notes=[];
+  if((st.algo==='colaborativo'||st.algo==='hibrido')&&noHist)notes.push('Sin historial no hay estudiantes parecidos. Es el problema del arranque en frío: marca algunos recursos en el historial para ver cómo cambia la lista.');
+  if((st.algo==='contenido'||st.algo==='hibrido')&&!st.interests.size&&!st.formats.size&&noHist)notes.push('Elige al menos un tema o formato para que el contenido tenga algo con qué comparar.');
+  if(st.algo==='popularidad')notes.push('Todos los estudiantes verían esta misma lista (salvo el ajuste de dificultad). Cambia el perfil y compruébalo.');
+  $('#rnote').innerHTML=notes.map(n=>`<div class="note">${n}</div>`).join('');
+}
+function bindM1(){
+  $('#level').addEventListener('input',e=>{st.level=+e.target.value;m1Controls();m1Results();});
+  $('#alpha').addEventListener('input',e=>{st.alpha=+e.target.value;m1Controls();m1Results();});
+  $('#k1').addEventListener('input',e=>{st.k=+e.target.value;m1Controls();m1Results();});
+  $('#zpd').addEventListener('change',e=>{st.zpd=e.target.checked;m1Results();});
+  $('#chTopics').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;const i=+b.dataset.i;st.interests.has(i)?st.interests.delete(i):st.interests.add(i);b.setAttribute('aria-pressed',st.interests.has(i));m1Results();});
+  $('#chTypes').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;const i=+b.dataset.i;st.formats.has(i)?st.formats.delete(i):st.formats.add(i);b.setAttribute('aria-pressed',st.formats.has(i));m1Results();});
+  $('#hist').addEventListener('click',e=>{
+    const b=e.target.closest('button');if(!b)return;
+    const row=b.closest('.hrow'),id=row.dataset.id;
+    if(b.dataset.v==='')delete st.hist[id];else st.hist[id]=b.dataset.v;
+    $$('button',row).forEach(x=>x.setAttribute('aria-pressed',x.dataset.v===b.dataset.v));
+    m1Results();
+  });
+}
+
+/* ---------- Módulo 2 ---------- */
+function buildM2(){
+  let total=0,sum=0;const byType=TYPES.map(()=>[0,0]);
+  M.forEach(r=>r.forEach((v,i)=>{if(v>0){total++;sum+=v;byType[ITEMS[i].ty][0]+=v;byType[ITEMS[i].ty][1]++;}}));
+  const dens=total/(NS*NI);
+  $('#kpis').innerHTML=[[NS,'estudiantes'],[NI,'recursos'],[total,'valoraciones'],[pct(dens),'de la matriz tiene datos'],[num(sum/total,2),'valoración media']].map(k=>`<div class="kpi"><b>${k[0]}</b><span>${k[1]}</span></div>`).join('');
+  $('#chFormat').innerHTML=bars(TYPES.map((t,i)=>({label:t,value:byType[i][0]/byType[i][1],color:TCOL[i]})),5,v=>num(v,2));
+  const bk=[[0,0],[0,0],[0,0],[0,0],[0,0]];
+  M.forEach((r,s)=>r.forEach((v,i)=>{if(v>0){const g=clamp(ITEMS[i].d-S[s].level,-2,2)+2;bk[g][0]+=C[s][i];bk[g][1]++;}}));
+  const gl=['Muy fácil','Algo fácil','A su nivel','Un paso más','Muy difícil'];
+  const comp=bk.map(b=>b[1]?b[0]/b[1]:0);
+  $('#chZpd').innerHTML=bars(gl.map((l,i)=>({label:l,value:comp[i],color:i===0||i===4?'var(--danger)':'var(--primary)'})),1,v=>Math.round(v*100)+'%');
+  // matriz
+  const ro=S.map((_,i)=>i).sort((a,b)=>M[b].filter(x=>x>0).length-M[a].filter(x=>x>0).length);
+  const co=ITEMS.map((_,i)=>i).sort((a,b)=>STATS.count[b]-STATS.count[a]);
+  const cw=13,ch=5.5;let rects='';
+  ro.forEach((s,y)=>co.forEach((i,x)=>{
+    const v=M[s][i];
+    rects+=v>0?`<rect class="hm" x="${x*cw}" y="${y*ch}" width="${cw-1}" height="${ch-1}" fill-opacity="${[0,.2,.4,.62,.82,1][v]}"/>`:`<rect class="hm0" x="${x*cw}" y="${y*ch}" width="${cw-1}" height="${ch-1}"/>`;
+  }));
+  $('#heat').innerHTML=`<svg viewBox="0 0 ${NI*cw} ${NS*ch}" role="img" aria-label="Matriz de valoraciones de ${NS} estudiantes por ${NI} recursos">${rects}</svg>`;
+  // popularidad
+  const sorted=[...STATS.count].sort((a,b)=>b-a),mx=sorted[0];let pb='';
+  sorted.forEach((c,i)=>{const h=c/mx*90;pb+=`<rect x="${i*10}" y="${96-h}" width="8" height="${h}" rx="2" fill="var(--primary)"/>`;});
+  $('#pop').innerHTML=`<svg viewBox="0 0 ${NI*10} 100" role="img" aria-label="Interacciones por recurso, de mayor a menor">${pb}</svg>`;
+  const top=Math.round(NI*0.2),topShare=sorted.slice(0,top).reduce((a,b)=>a+b,0)/total;
+  $('#popCap').textContent=`Los ${top} recursos más usados (el 20% del catálogo) concentran el ${pct(topShare)} de las interacciones.`;
+  const best=byType.map((b,i)=>[b[0]/b[1],i]).sort((a,b)=>b[0]-a[0])[0];
+  const lowRec=Math.min(...STATS.count),sparseCount=STATS.count.filter(c=>c<=Math.max(2,lowRec+1)).length;
+  $('#insights').innerHTML=[
+    `Solo el ${pct(dens)} de la matriz tiene datos. Con tan pocas valoraciones, encontrar estudiantes parecidos es difícil.`,
+    `Hay popularidad desigual: unos pocos recursos reciben la mayoría de las interacciones y ${sparseCount} casi no se usan. Un sistema que sigue a la mayoría los enterraría.`,
+    `${TYPES[best[1]]} es el formato mejor valorado (${num(best[0],2)}), pero no lo es para todos: cada estudiante tiene sus preferencias.`,
+    `Cuando el recurso queda muy lejos del nivel del estudiante, la finalización cae (${Math.round(comp[4]*100)}% en recursos muy difíciles frente a ${Math.round(comp[2]*100)}% a su nivel). Por eso conviene ajustar la dificultad.`
+  ].map(t=>`<li>${t}</li>`).join('');
+  $('#stSel').innerHTML=S.map(s=>`<option value="${s.id}">${s.name}, nivel ${s.level}</option>`).join('');
+  $('#stSel').addEventListener('change',stCard);
+  stCard();
+}
+function stCard(){
+  const s=+$('#stSel').value;
+  const rows=ITEMS.map((it,i)=>({it,r:M[s][i],c:C[s][i]})).filter(x=>x.r>0).sort((a,b)=>b.r-a.r);
+  $('#stTable').innerHTML=`<thead><tr><th>Recurso</th><th>Formato</th><th>Dificultad</th><th>Valoración</th><th>Finalizó</th></tr></thead><tbody>`+
+    rows.map(x=>`<tr><td style="white-space:normal;min-width:180px">${x.it.title}</td><td>${TYPES[x.it.ty]}</td><td>${x.it.d}</td><td>${x.r}</td><td>${Math.round(x.c*100)}%</td></tr>`).join('')+'</tbody>';
+}
+
+/* ---------- Módulo 3 ---------- */
+const cf={algo:'hibrido',alpha:0.5,k:15,N:5,hist:12,frac:25,zpd:true};
+let runs=[];
+
+function makeSplit(seed,frac,maxHist){
+  const r=rng(seed);
+  const train=M.map(row=>row.map(()=>0)),test=M.map(row=>row.map(()=>0));
+  M.forEach((row,s)=>{
+    const idx=[];row.forEach((v,i)=>{if(v>0)idx.push(i);});
+    for(let i=idx.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}
+    const tc=Math.max(1,Math.round(frac*idx.length));
+    idx.slice(0,tc).forEach(i=>test[s][i]=row[i]);
+    idx.slice(tc).slice(0,maxHist).forEach(i=>train[s][i]=row[i]);
+  });
+  return {train,test};
+}
+function evaluate(c){
+  const maxHist=c.hist>=12?999:c.hist;
+  const acc={p:0,r:0,h:0,div:0,fit:0,n:0},seen=new Set();
+  for(let rep=0;rep<5;rep++){
+    const sp=makeSplit(100+rep,c.frac/100,maxHist),stats=itemStats(sp.train);
+    for(let s=0;s<NS;s++){
+      const rel=[];sp.test[s].forEach((v,i)=>{if(v>=4)rel.push(i);});
+      if(!rel.length)continue;
+      const ur=sp.train[s],uv=new Array(11).fill(0);
+      for(let i=0;i<NI;i++)if(ur[i]>0)VEC[i].forEach((x,j)=>uv[j]+=(ur[i]-3)/2*x);
+      const res=rank({algo:c.algo,userVec:uv,ur,T:sp.train,excl:s,alpha:c.alpha,k:c.k,zpd:c.zpd,level:S[s].level,N:c.N,stats});
+      const hits=res.list.filter(x=>sp.test[s][x.i]>=4).length;
+      acc.p+=hits/c.N;acc.r+=hits/rel.length;acc.h+=hits>0?1:0;
+      acc.div+=new Set(res.list.map(x=>ITEMS[x.i].t)).size/Math.min(c.N,TOPICS.length);
+      acc.fit+=res.list.filter(x=>Math.abs(ITEMS[x.i].d-S[s].level)<=1).length/c.N;
+      res.list.forEach(x=>seen.add(x.i));acc.n++;
+    }
+  }
+  return {precision:acc.p/acc.n,recall:acc.r/acc.n,hit:acc.h/acc.n,coverage:seen.size/NI,diversity:acc.div/acc.n,fit:acc.fit/acc.n};
+}
+function cfgText(c){
+  const p=[];
+  if(c.algo==='colaborativo'||c.algo==='hibrido')p.push('k '+c.k);
+  if(c.algo==='hibrido')p.push('α '+num(c.alpha,1));
+  p.push('Top-'+c.N,'historial '+(c.hist>=12?'completo':c.hist),'ocultas '+c.frac+'%',c.zpd?'con ajuste de nivel':'sin ajuste de nivel');
+  return p.join(', ');
+}
+function runOne(algo){
+  const c=Object.assign({},cf,{algo});
+  runs.push({id:runs.length?runs[runs.length-1].id+1:1,algo,cfg:cfgText(c),m:evaluate(c)});
+  if(runs.length>12)runs.shift();
+}
+const COLS=[['precision','Precisión'],['recall','Recall'],['hit','Aciertos'],['coverage','Cobertura'],['diversity','Diversidad'],['fit','En su nivel']];
+function renderLog(){
+  if(!runs.length){$('#logT').innerHTML='<tbody><tr><td>Aún no hay pruebas. Configura el prototipo y pulsa Ejecutar prueba.</td></tr></tbody>';$('#logBars').innerHTML='';return;}
+  const best={};COLS.forEach(c=>{best[c[0]]=Math.max(...runs.map(r=>r.m[c[0]]));});
+  $('#logT').innerHTML='<thead><tr><th>#</th><th>Algoritmo</th><th>Configuración</th>'+COLS.map(c=>`<th>${c[1]}</th>`).join('')+'</tr></thead><tbody>'+
+    runs.map(r=>`<tr><td>${r.id}</td><td>${ALGO_NAMES[r.algo]}</td><td style="white-space:normal;min-width:180px;font-size:13px">${r.cfg}</td>`+COLS.map(c=>`<td class="${r.m[c[0]]===best[c[0]]&&best[c[0]]>0&&runs.length>1?'best':''}">${pct(r.m[c[0]])}</td>`).join('')+'</tr>').join('')+'</tbody>';
+  const mx=Math.max(...runs.map(r=>r.m.precision),0.01);
+  $('#logBars').innerHTML=bars(runs.map(r=>({label:'#'+r.id+' '+ALGO_NAMES[r.algo],value:r.m.precision})),mx*1.1,v=>pct(v));
+}
+function m3Controls(){
+  $('#alpha3Out').textContent=num(cf.alpha,1);$('#k3Out').textContent=cf.k;$('#n3Out').textContent='Top-'+cf.N;
+  $('#h3Out').textContent=cf.hist>=12?'Todo':cf.hist+' valoraciones';$('#f3Out').textContent=cf.frac+'%';
+  $('#alpha3Box').classList.toggle('dim',cf.algo!=='hibrido');
+  $('#k3Box').classList.toggle('dim',!(cf.algo==='colaborativo'||cf.algo==='hibrido'));
+}
+function bindM3(){
+  buildSeg($('#algo3'),cf.algo,a=>{cf.algo=a;m3Controls();});
+  [['alpha3','alpha',parseFloat],['k3','k',Number],['n3','N',Number],['h3','hist',Number],['f3','frac',Number]].forEach(x=>{
+    $('#'+x[0]).addEventListener('input',e=>{cf[x[1]]=x[2](e.target.value);m3Controls();});
+  });
+  $('#z3').addEventListener('change',e=>{cf.zpd=e.target.checked;});
+  $('#run3').addEventListener('click',()=>{runOne(cf.algo);renderLog();});
+  $('#cmp3').addEventListener('click',()=>{Object.keys(ALGO_NAMES).forEach(runOne);renderLog();});
+  $('#clr3').addEventListener('click',()=>{runs=[];renderLog();});
+  $('#copy3').addEventListener('click',()=>{
+    if(!runs.length)return;
+    const txt=['#\tAlgoritmo\tConfiguración\t'+COLS.map(c=>c[1]).join('\t')].concat(runs.map(r=>[r.id,ALGO_NAMES[r.algo],r.cfg].concat(COLS.map(c=>pct(r.m[c[0]]))).join('\t'))).join('\n');
+    const done=ok=>{$('#copyMsg').textContent=ok?'Tabla copiada':'No se pudo copiar. Selecciona la tabla a mano.';setTimeout(()=>{$('#copyMsg').textContent='';},2500);};
+    try{
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(()=>done(true),()=>fallback());}
+      else fallback();
+    }catch(e){fallback();}
+    function fallback(){try{const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();const ok=document.execCommand('copy');document.body.removeChild(ta);done(ok);}catch(e){done(false);}}
+  });
+}
+
+/* ---------- Inicio ---------- */
+buildM1();bindM1();m1Controls();m1Results();
+buildM2();
+bindM3();m3Controls();
+Object.keys(ALGO_NAMES).forEach(runOne);renderLog();
+})();
+</script>
+</body>
+</html>
